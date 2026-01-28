@@ -11,8 +11,8 @@ export default function AppStack() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={AppDrawer} />
             {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
-            <Stack.Screen name="CourseDetails" component={CourseDetailsScreen} />
-            <Stack.Screen name="ContentDetails" component={ContentDetailsScreen} />
+            {/* <Stack.Screen name="CourseDetails" component={CourseDetailsScreen} />
+            <Stack.Screen name="ContentDetails" component={ContentDetailsScreen} /> */}
         </Stack.Navigator>
     );
 }
