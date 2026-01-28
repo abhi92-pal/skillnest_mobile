@@ -1,6 +1,10 @@
-// import RootNavigator from './src/navigation/RootNavigator';
 import RootNavigator from './navigation/RootNavigator';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
-  return <RootNavigator />;
+  return (
+    <AuthProvider>
+      <RootNavigator />
+    </AuthProvider>
+  );
 }

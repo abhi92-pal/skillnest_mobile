@@ -1,6 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DashboardScreen from '../screens/dashboard/DashboardScreen';
-// import CustomDrawer from '../components/CustomDrawer';
 import CustomDrawer from '../components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();

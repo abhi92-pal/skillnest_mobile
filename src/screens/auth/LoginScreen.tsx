@@ -9,8 +9,10 @@ import {
 import { useState } from 'react';
 import { loginApi } from '../../services/authService';
 import { storeAuth } from '../../utils/authStorage';
+import { useAuth } from '../../context/AuthContext';
 
 export default function LoginScreen({ navigation }: any) {
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -80,8 +82,8 @@ export default function LoginScreen({ navigation }: any) {
             setLoading(true);
             const data = await loginApi(email, password);
             await storeAuth(data.token, data.user);
-
-            navigation.replace('Dashboard');
+            login();
+            // navigation.replace('Dashboard');
         } catch (e) {
             console.log(e);
         } finally {

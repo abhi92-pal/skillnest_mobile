@@ -8,10 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { clearAuth } from '../utils/authStorage';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function CustomDrawer(props: any) {
     const { navigation } = props;
     const [user, setUser] = useState<any>(null);
+    const { logout } = useAuth();
 
     useEffect(() => {
         AsyncStorage.getItem('SKILLNEST_USER').then((data) => {
@@ -19,13 +21,20 @@ export default function CustomDrawer(props: any) {
         });
     }, []);
 
-    const logout = async () => {
-        await clearAuth();
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
-        });
-    };
+    // const logout = async () => {
+    //     await clearAuth();
+
+    //     props.navigation.closeDrawer();
+    //     props.navigation.getParent()?.setParams({});
+    //     // navigation.reset({
+    //     //     index: 0,
+    //     //     routes: [{ name: 'Login' }],
+    //     // });
+    // };
+
+    const logoutHandler = async () => {
+        await logout();
+    }
 
     return (
         <DrawerContentScrollView {...props}>
@@ -45,7 +54,7 @@ export default function CustomDrawer(props: any) {
 
             <TouchableOpacity
                 style={[styles.item, styles.logout]}
-                onPress={logout}
+                onPress={logoutHandler}
             >
                 <Text style={[styles.itemText, { color: 'red' }]}>Logout</Text>
             </TouchableOpacity>
@@ -54,29 +63,29 @@ export default function CustomDrawer(props: any) {
 }
 
 export const styles = StyleSheet.create({
-  header: {
-    padding: 20,
-    backgroundColor: '#2D3A8C',
-  },
-  name: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  email: {
-    color: '#ddd',
-    fontSize: 13,
-    marginTop: 4,
-  },
-  item: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderColor: '#eee',
-  },
-  itemText: {
-    fontSize: 16,
-  },
-  logout: {
-    marginTop: 20,
-  },
+    header: {
+        padding: 20,
+        backgroundColor: '#2D3A8C',
+    },
+    name: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: '600',
+    },
+    email: {
+        color: '#ddd',
+        fontSize: 13,
+        marginTop: 4,
+    },
+    item: {
+        padding: 16,
+        borderBottomWidth: 1,
+        borderColor: '#eee',
+    },
+    itemText: {
+        fontSize: 16,
+    },
+    logout: {
+        marginTop: 20,
+    },
 });
