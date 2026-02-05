@@ -81,7 +81,8 @@ export default function LoginScreen({ navigation }: any) {
         try {
             setLoading(true);
             const data = await loginApi(email, password);
-            await storeAuth(data.token, data.user);
+            
+            await storeAuth(data.data.token, data.data.user);
             login();
             // navigation.replace('Dashboard');
         } catch (e) {
